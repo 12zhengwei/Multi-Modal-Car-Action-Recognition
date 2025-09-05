@@ -1,1 +1,28 @@
-torch>=1.12.0\ntorchvision>=0.13.0\ntorchaudio>=0.12.0\nopencv-python>=4.6.0\nnumpy>=1.21.0\nPillow>=8.3.0\nmatplotlib>=3.5.0\nseaborn>=0.11.0\ntqdm>=4.62.0\ntensorboard>=2.8.0\nscikit-learn>=1.0.0\neinops>=0.4.0\ntimm>=0.6.0\ndecord>=0.6.0
+# Core dependencies
+torch>=1.12.0
+torchvision>=0.13.0
+torchaudio>=0.12.0
+
+# Computer vision and video processing
+opencv-python>=4.6.0
+decord>=0.6.0
+Pillow>=8.3.0
+
+# Scientific computing
+numpy>=1.21.0
+scikit-learn>=1.0.0
+einops>=0.4.0
+
+# Visualization and plotting
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Logging and monitoring
+tensorboard>=2.8.0
+tqdm>=4.62.0
+
+# Model utilities
+timm>=0.6.0
+
+# Configuration and data handling
+PyYAML>=6.0

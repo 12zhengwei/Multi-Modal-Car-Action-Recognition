@@ -218,7 +218,11 @@ class UniFormerV2(nn.Module):
         # Initialize weights
         if self.pos_embed is not None:
             trunc_normal_(self.pos_embed, std=.02)
-        trunc_normal_(self.head.weight, std=.02)
+        
+        # Only initialize head weights if it's a Linear layer
+        if isinstance(self.head, nn.Linear):
+            trunc_normal_(self.head.weight, std=.02)
+            
         self.apply(self._init_weights)
     
     def _init_weights(self, m):
@@ -272,10 +276,19 @@ def uniformerv2_small(**kwargs):
 
 def uniformerv2_base(**kwargs):
     """UniFormerV2 Base model."""
-    model = UniFormerV2(
-        embed_dim=768, depth=12, num_heads=12, mlp_ratio=4,
-        **kwargs
-    )
+    # Set base configuration defaults
+    base_config = {
+        'embed_dim': 768,
+        'depth': 12,
+        'num_heads': 12,
+        'mlp_ratio': 4
+    }
+    
+    # Update with provided kwargs, avoiding duplicates
+    for key, value in kwargs.items():
+        base_config[key] = value
+    
+    model = UniFormerV2(**base_config)
     return model
 
 
@@ -290,6 +303,10 @@ def uniformerv2_large(**kwargs):
 
 def create_uniformerv2_multimodal(num_classes=34, in_chans=4, **kwargs):
     """Create UniFormerV2 for multi-modal input (RGB + thermal)."""
+    # Remove conflicting parameters
+    kwargs.pop('num_classes', None)  # Remove if exists to avoid conflict
+    kwargs.pop('in_chans', None)     # Remove if exists to avoid conflict
+    
     return uniformerv2_base(
         num_classes=num_classes,
         in_chans=in_chans,  # 4 channels for early fusion (RGB + thermal)
