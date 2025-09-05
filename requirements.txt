@@ -1,0 +1,1 @@
+torch>=1.12.0\ntorchvision>=0.13.0\ntorchaudio>=0.12.0\nopencv-python>=4.6.0\nnumpy>=1.21.0\nPillow>=8.3.0\nmatplotlib>=3.5.0\nseaborn>=0.11.0\ntqdm>=4.62.0\ntensorboard>=2.8.0\nscikit-learn>=1.0.0\neinops>=0.4.0\ntimm>=0.6.0\ndecord>=0.6.0
